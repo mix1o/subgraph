@@ -1,0 +1,27 @@
+type PoolHistory @entity {
+  id: ID!
+  poolAddress: Bytes!
+  reward: BigInt!
+}
+
+type Deposit @entity {
+  id: ID!
+  poolAddress: Bytes!
+  tokenAmount: BigInt!
+  poolDepositor: PoolDepositor!
+}
+
+type Withdraw @entity {
+  id: ID!
+  poolAddress: Bytes!
+  tokenAmount: BigInt!
+  poolDepositor: PoolDepositor!
+}
+
+type PoolDepositor @entity {
+  id: ID!
+  pool: Bytes!
+  address: Bytes!
+  deposits: [Deposit!] @derivedFrom(field: "poolDepositor")
+  withdraws: [Withdraw!] @derivedFrom(field: "poolDepositor")
+}

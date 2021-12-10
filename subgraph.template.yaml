@@ -1,0 +1,35 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Pool
+    network: {{network}}
+    source:
+      abi: Pool
+      address: "{{contracts.pool.address}}"
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      file: ./src/mappings.ts
+      language: wasm/assemblyscript
+      entities:
+        - Pool
+        - Deposit
+        - Withdraw
+        - PoolDepositor
+      abis:
+        - name: Pool
+          file: ./abis/Pool.json
+        - name: MyToken
+          file: ./abis/MyToken.json
+        - name: LpToken
+          file: ./abis/LpToken.json
+      eventHandlers:
+        - event: Deposit(address,uint256,address)
+          handler: handleDeposit
+        - event: Withdraw(address,uint256,address)
+          handler: handleWithdraw
+        - event: PoolEarned(address,uint256)
+          handler: handlePoolEarned
