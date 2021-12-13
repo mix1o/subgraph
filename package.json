@@ -11,11 +11,12 @@
     "create-local": "graph create --node http://localhost:8020/ rainbow/subgraph",
     "remove-local": "graph remove --node http://localhost:8020/ rainbow/subgraph",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 rainbow/subgraph",
-    "build-abis": "./build-abis.sh"
+    "build-abis": "./build-abis.sh",
+    "deploy": "graph deploy --node"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.20.1",
-    "@graphprotocol/graph-ts": "^0.20.0",
+    "@graphprotocol/graph-cli": "^0.25.1",
+    "@graphprotocol/graph-ts": "^0.24.1",
     "@openzeppelin/contracts": "^3.4.0",
     "@typechain/ethers-v5": "^7.0.1",
     "@types/jest": "^26.0.20",
@@ -36,7 +37,7 @@
   },
   "dependencies": {
     "ethereum-waffle": "^3.4.0",
-    "rainbow-abis": "^0.0.14",
+    "rainbow-abis": "^0.0.15",
     "waffle": "^0.0.4"
   }
 }
