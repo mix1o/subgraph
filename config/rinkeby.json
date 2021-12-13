@@ -6,16 +6,16 @@
       "address": "0x4Ea203Ff43d0eE98346e73826239B6eB06B83d7C"
     },
     "flashLoan": {
-      "address": "0x7a6daC9492b693D064D20B25d1D88d67c87C5605"
+      "address": "0x302177418aEb68275C164684BdCF42eCE0bF622C"
     },
     "lpToken": {
-      "address": "0x61ef0B27486aC8390aE50c6f969d7E653D9C3c8E"
+      "address": "0x92Cad178E8F65E9500fB3F427fd4E1383084a260"
     },
     "myToken": {
       "address": "0x621c7184F6AEb78835E94df6112121AF178F8d87"
     },
     "pool": {
-      "address": "0x68a5d403fAF29FC30ec4aA590D7Dcf209883e3d4"
+      "address": "0xf435e8E46293B3dA224F6C0913969D6f5dfE7E86"
     }
   }
 }
