@@ -6,7 +6,6 @@ import {
   Value,
   ValueKind,
   store,
-  Address,
   Bytes,
   BigInt,
   BigDecimal
@@ -16,26 +15,31 @@ export class PoolHistory extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("poolAddress", Value.fromBytes(Bytes.empty()));
+    this.set("reward", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save PoolHistory entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save PoolHistory entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("PoolHistory", id.toString(), this);
+    assert(id != null, "Cannot save PoolHistory entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save PoolHistory entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("PoolHistory", id.toString(), this);
+    }
   }
 
   static load(id: string): PoolHistory | null {
-    return store.get("PoolHistory", id) as PoolHistory | null;
+    return changetype<PoolHistory | null>(store.get("PoolHistory", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -44,7 +48,7 @@ export class PoolHistory extends Entity {
 
   get poolAddress(): Bytes {
     let value = this.get("poolAddress");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set poolAddress(value: Bytes) {
@@ -53,7 +57,7 @@ export class PoolHistory extends Entity {
 
   get reward(): BigInt {
     let value = this.get("reward");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set reward(value: BigInt) {
@@ -65,26 +69,32 @@ export class Deposit extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("poolAddress", Value.fromBytes(Bytes.empty()));
+    this.set("tokenAmount", Value.fromBigInt(BigInt.zero()));
+    this.set("poolDepositor", Value.fromString(""));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Deposit entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Deposit entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Deposit", id.toString(), this);
+    assert(id != null, "Cannot save Deposit entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Deposit entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Deposit", id.toString(), this);
+    }
   }
 
   static load(id: string): Deposit | null {
-    return store.get("Deposit", id) as Deposit | null;
+    return changetype<Deposit | null>(store.get("Deposit", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -93,7 +103,7 @@ export class Deposit extends Entity {
 
   get poolAddress(): Bytes {
     let value = this.get("poolAddress");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set poolAddress(value: Bytes) {
@@ -102,7 +112,7 @@ export class Deposit extends Entity {
 
   get tokenAmount(): BigInt {
     let value = this.get("tokenAmount");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set tokenAmount(value: BigInt) {
@@ -111,7 +121,7 @@ export class Deposit extends Entity {
 
   get poolDepositor(): string {
     let value = this.get("poolDepositor");
-    return value.toString();
+    return value!.toString();
   }
 
   set poolDepositor(value: string) {
@@ -123,26 +133,32 @@ export class Withdraw extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("poolAddress", Value.fromBytes(Bytes.empty()));
+    this.set("tokenAmount", Value.fromBigInt(BigInt.zero()));
+    this.set("poolDepositor", Value.fromString(""));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save Withdraw entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save Withdraw entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("Withdraw", id.toString(), this);
+    assert(id != null, "Cannot save Withdraw entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Withdraw entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Withdraw", id.toString(), this);
+    }
   }
 
   static load(id: string): Withdraw | null {
-    return store.get("Withdraw", id) as Withdraw | null;
+    return changetype<Withdraw | null>(store.get("Withdraw", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -151,7 +167,7 @@ export class Withdraw extends Entity {
 
   get poolAddress(): Bytes {
     let value = this.get("poolAddress");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set poolAddress(value: Bytes) {
@@ -160,7 +176,7 @@ export class Withdraw extends Entity {
 
   get tokenAmount(): BigInt {
     let value = this.get("tokenAmount");
-    return value.toBigInt();
+    return value!.toBigInt();
   }
 
   set tokenAmount(value: BigInt) {
@@ -169,7 +185,7 @@ export class Withdraw extends Entity {
 
   get poolDepositor(): string {
     let value = this.get("poolDepositor");
-    return value.toString();
+    return value!.toString();
   }
 
   set poolDepositor(value: string) {
@@ -181,26 +197,31 @@ export class PoolDepositor extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("pool", Value.fromBytes(Bytes.empty()));
+    this.set("address", Value.fromBytes(Bytes.empty()));
   }
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save PoolDepositor entity without an ID");
-    assert(
-      id.kind == ValueKind.STRING,
-      "Cannot save PoolDepositor entity with non-string ID. " +
-        'Considering using .toHex() to convert the "id" to a string.'
-    );
-    store.set("PoolDepositor", id.toString(), this);
+    assert(id != null, "Cannot save PoolDepositor entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save PoolDepositor entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("PoolDepositor", id.toString(), this);
+    }
   }
 
   static load(id: string): PoolDepositor | null {
-    return store.get("PoolDepositor", id) as PoolDepositor | null;
+    return changetype<PoolDepositor | null>(store.get("PoolDepositor", id));
   }
 
   get id(): string {
     let value = this.get("id");
-    return value.toString();
+    return value!.toString();
   }
 
   set id(value: string) {
@@ -209,7 +230,7 @@ export class PoolDepositor extends Entity {
 
   get pool(): Bytes {
     let value = this.get("pool");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set pool(value: Bytes) {
@@ -218,7 +239,7 @@ export class PoolDepositor extends Entity {
 
   get address(): Bytes {
     let value = this.get("address");
-    return value.toBytes();
+    return value!.toBytes();
   }
 
   set address(value: Bytes) {
@@ -227,7 +248,7 @@ export class PoolDepositor extends Entity {
 
   get deposits(): Array<string> | null {
     let value = this.get("deposits");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -235,16 +256,16 @@ export class PoolDepositor extends Entity {
   }
 
   set deposits(value: Array<string> | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("deposits");
     } else {
-      this.set("deposits", Value.fromStringArray(value as Array<string>));
+      this.set("deposits", Value.fromStringArray(<Array<string>>value));
     }
   }
 
   get withdraws(): Array<string> | null {
     let value = this.get("withdraws");
-    if (value === null || value.kind == ValueKind.NULL) {
+    if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
       return value.toStringArray();
@@ -252,10 +273,10 @@ export class PoolDepositor extends Entity {
   }
 
   set withdraws(value: Array<string> | null) {
-    if (value === null) {
+    if (!value) {
       this.unset("withdraws");
     } else {
-      this.set("withdraws", Value.fromStringArray(value as Array<string>));
+      this.set("withdraws", Value.fromStringArray(<Array<string>>value));
     }
   }
 }
