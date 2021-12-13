@@ -71,8 +71,6 @@ describe("Pool", () => {
     expect(context.deployerAddress.toLowerCase()).toMatch(
       deposit.poolDepositor.id.toString()
     );
-
-    expect(deposit.tokenAmount).toMatch(parseUnits("30").toString());
   });
 
   test("Should return new withdraw", async () => {
